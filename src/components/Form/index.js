@@ -1,6 +1,5 @@
 import React, { useState } from "react"
-import { View, Text, TextInput, TouchableOpacity} from "react-native"
-import symbolicateStackTrace from "react-native/Libraries/Core/Devtools/symbolicateStackTrace";
+import { View, Text, TextInput, TouchableOpacity, Vibration, Pressable, Keyboard} from "react-native"
 import ResultImc from "./ResultImc";
 import styles from "./style";
 
@@ -11,9 +10,18 @@ const [weight, setWeight] = useState(null)
 const [messageImc, setMessageImc] = useState("Preencha o peso e altura")
 const [imc, setImc] = useState(null)
 const [textButton, setTextButton] = useState("Calcular")
+const [errorMessage, setErrorMessage] = useState(null)
 
 function imcCalculator(){
-    return setImc((weight/(height*height)).toFixed(2))
+    let heightFormat = height.replace(",",".")
+    return setImc((weight/(heightFormat*heightFormat)).toFixed(2))
+}
+
+function verificationImc(){
+    if(imc == null){
+        Vibration.vibrate();
+        setErrorMessage("Campo obrigatório*")
+    }
 }
 
 function validationImc(){
@@ -23,18 +31,22 @@ function validationImc(){
         setWeight(null)
         setMessageImc("Seu IMC é igual a:")
         setTextButton("Calcular novamente")
+        setErrorMessage(null)
+
         return 
     }
+    verificationImc()
     setImc(null)
     setTextButton("Calcular")
     setMessageImc("Preencha o peso e a altura")
 }
 
     return(
-        <View style={styles.formContext}>
+        <Pressable onPress={Keyboard.dismiss} style={styles.formContext}>
             <View style={styles.form }>  
 
                 <Text style={styles.formLabel}>Altura</Text>
+                <Text style={styles .errorMessage}>{errorMessage}</Text>
                 <TextInput style={styles.input}
                 onChangeText={setHeight}
                 value={height}
@@ -43,6 +55,7 @@ function validationImc(){
                 />
 
                 <Text style={styles.formLabel}>Peso</Text>
+                <Text style={styles.errorMessage}>{errorMessage}</Text>  
                 <TextInput 
                 style={styles.input}
                 onChangeText={setWeight}
@@ -60,6 +73,6 @@ function validationImc(){
                 </TouchableOpacity>
             </View>
             <ResultImc messageResultImc={messageImc} resultImc={imc}/>
-        </View>
+        </Pressable>
     );
 }

@@ -7,15 +7,14 @@ const styles = StyleSheet.create({
         bottom:0,
         backgroundColor:"#ffffff",
         alignItems:"center",
-        borderTopLeftRadius:30,
-        borderTopRightRadius:30,
-        marginTop:30,
+        borderTopLeftRadius:40,
+        borderTopRightRadius:40,
+        paddingTop:5,
+        justifyContent:"space-around",
     },
     form:{
         width:"100%",
         height:"auto",
-        marginTop:30,
-        padding:10,   
     },
     formLabel:{
         color:"#000000",
@@ -44,6 +43,12 @@ const styles = StyleSheet.create({
     textButtonCalculator:{
         fontSize:20,
         color:"#ffffff",
+    },
+    errorMessage:{
+        fontSize:12,
+        color:"red",
+        fontWeight:"bold",
+        paddingLeft:20,
     }
 });
 
