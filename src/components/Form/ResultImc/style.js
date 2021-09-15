@@ -20,19 +20,18 @@ const styles = StyleSheet.create({
     boxShareButton:{
         width:"100%",
         alignItems:"center",
-        marginBottom:10,
+        marginBottom:100,
     },
     shared:{
         backgroundColor:"#1877f2",
         borderRadius:50,
-        paddingBottom:5,
+        paddingBottom:8,
         paddingTop:5,
     },
     sharedText:{
         color:"#ffffff",
         fontWeight:"bold",
         paddingHorizontal:30,
-
     }
 });
 
